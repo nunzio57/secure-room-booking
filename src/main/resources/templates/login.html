@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Prenotazione Aule</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        /* Reset e impostazioni base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Lo Sfondo Elegante */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Gradiente professionale blu scuro - grigio */
+            background: linear-gradient(135deg, #1c2e4a, #3b5998);
+        }
+
+        /* La "Card" del Login */
+        .login-container {
+            background: rgba(255, 255, 255, 0.95); /* Bianco leggermente trasparente */
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* Ombra morbida per profondità */
+            width: 100%;
+            max-width: 450px; /* Non diventa troppo larga su schermi grandi */
+            text-align: center;
+        }
+
+        /* Titolo */
+        .login-container h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        /* Messaggio di Errore */
+        .error-message {
+            background-color: #ffecec;
+            color: #d93025;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .error-message i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Contenitore dei campi di input */
+        .input-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        /* Stile dei campi Username e Password */
+        .input-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px; /* Spazio a sinistra per l'icona */
+            background: #f1f3f6;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        /* Effetto quando clicchi sul campo */
+        .input-box input:focus {
+            border-color: #3b5998;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(59, 89, 152, 0.1);
+        }
+
+        /* Icone dentro i campi */
+        .input-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.4rem;
+            color: #888;
+        }
+
+        /* Il Bottone "Accedi" */
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #1c2e4a, #3b5998);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Effetto hover sul bottone */
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(28, 46, 74, 0.3);
+        }
+
+        /* Piccola scritta in fondo */
+        .footer-text {
+            margin-top: 2rem;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Benvenuto</h2>
+
+    <div th:if="${error}" class="error-message">
+        <i class='bx bx-error-circle'></i>
+        <span th:text="${error}">Credenziali non valide</span>
+    </div>
+
+    <form th:action="@{/login}" method="post">
+
+        <div class="input-box">
+            <i class='bx bx-user'></i>
+            <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+        </div>
+
+        <div class="input-box">
+            <i class='bx bx-lock-alt'></i>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+
+        <button type="submit" class="btn-login">Accedi</button>
+    </form>
+
+    <p class="footer-text">Sistema di Prenotazione Aule Universitario</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+version: '3'
+services:
+  openldap:
+    image: osixia/openldap:latest
+    container_name: openldap
+    environment:
+      LDAP_ORGANISATION: "Example Inc"
+      LDAP_DOMAIN: "example.com"
+      # 🔒 LE PASSWORD ORA SONO VARIABILI
+      LDAP_ADMIN_PASSWORD: "${LDAP_ADMIN_PASSWORD}"
+      LDAP_CONFIG_PASSWORD: "${LDAP_CONFIG_PASSWORD}"
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+      LDAP_TLS_VERIFY_CLIENT: "never"
+    ports:
+      - "389:389"
+      - "636:636"
+    volumes:
+      - ldap-data:/var/lib/ldap
+      - ldap-config:/etc/ldap/slapd.d
+    networks:
+      - ldap-network
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    container_name: phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - "8080:80"
+    depends_on:
+      - openldap
+    networks:
+      - ldap-network
+
+  postgres:
+    image: postgres:15
+    container_name: my-postgres
+    environment:
+      POSTGRES_DB: prenotazioni_db
+      # 🔒 ANCHE QUI VARIABILI
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - ldap-network
+
+volumes:
+  ldap-data:
+  ldap-config:
+  db_data:
+
+networks:
+  ldap-network:
+    driver: bridge

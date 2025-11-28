@@ -1,0 +1,31 @@
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+        PolicyId="AdminDeleteBookingPolicy"
+        RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable"
+        Version="1.0">
+
+    <Description>Policy Finale Funzionante</Description>
+    <Target/> <Rule RuleId="PermitAdminRule" Effect="Deny">
+    <Target>
+        <AnyOf>
+            <AllOf>
+                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">delete</AttributeValue>
+                    <AttributeDesignator AttributeId="urn:action"
+                                         Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+                                         DataType="http://www.w3.org/2001/XMLSchema#string"
+                                         MustBePresent="false"/>
+                </Match>
+                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">ROLE_ADMINISTRATORS</AttributeValue>
+                    <AttributeDesignator AttributeId="urn:role"
+                                         Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+                                         DataType="http://www.w3.org/2001/XMLSchema#string"
+                                         MustBePresent="false"/>
+                </Match>
+            </AllOf>
+        </AnyOf>
+    </Target>
+</Rule>
+
+    <Rule RuleId="DenyOthers" Effect="Deny"/>
+</Policy>

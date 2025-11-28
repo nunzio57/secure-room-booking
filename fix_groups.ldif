@@ -1,0 +1,14 @@
+dn: cn=ADMINISTRATORS,ou=groups,dc=example,dc=com
+changetype: add
+objectClass: top
+objectClass: groupOfNames
+cn: ADMINISTRATORS
+member: uid=admin,ou=people,dc=example,dc=com
+
+dn: cn=USERS,ou=groups,dc=example,dc=com
+changetype: add
+objectClass: top
+objectClass: groupOfNames
+cn: USERS
+member: uid=nunzio57,ou=people,dc=example,dc=com
+member: uid=admin,ou=people,dc=example,dc=com

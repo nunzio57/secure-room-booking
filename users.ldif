@@ -1,0 +1,54 @@
+# 1. Struttura Root (Se non esiste già)
+dn: dc=example,dc=com
+objectClass: top
+objectClass: domain
+dc: example
+
+# 2. Organizational Unit per gli Utenti (ou=people)
+dn: ou=people,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+
+# 3. Organizational Unit per i Gruppi (ou=groups)
+dn: ou=groups,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+
+# 4. Utente Admin
+dn: uid=admin,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: Admin
+sn: Administrator
+uid: admin
+userPassword: admin123
+
+# 5. Utente User (Nunzio)
+dn: uid=nunzio57,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: Nunzio
+sn: Rossi
+uid: nunzio57
+userPassword: nunzio123
+
+# 6. Gruppo Amministratori
+dn: cn=ADMINISTRATORS,ou=groups,dc=example,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: ADMINISTRATORS
+member: uid=admin,ou=people,dc=example,dc=com
+
+# 7. Gruppo Utenti Semplici
+dn: cn=USERS,ou=groups,dc=example,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: USERS
+member: uid=nunzio57,ou=people,dc=example,dc=com
+member: uid=admin,ou=people,dc=example,dc=com
