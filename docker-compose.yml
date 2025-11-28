@@ -7,7 +7,7 @@ services:
     environment:
       LDAP_ORGANISATION: "Example Inc"
       LDAP_DOMAIN: "example.com"
-      # 🔒 LE PASSWORD ORA SONO VARIABILI
+      # LE PASSWORD ORA SONO VARIABILI
       LDAP_ADMIN_PASSWORD: "${LDAP_ADMIN_PASSWORD}"
       LDAP_CONFIG_PASSWORD: "${LDAP_CONFIG_PASSWORD}"
       LDAP_RFC2307BIS_SCHEMA: "false"
@@ -40,7 +40,7 @@ services:
     container_name: my-postgres
     environment:
       POSTGRES_DB: prenotazioni_db
-      # 🔒 ANCHE QUI VARIABILI
+      # ANCHE QUI VARIABILI
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     ports:
